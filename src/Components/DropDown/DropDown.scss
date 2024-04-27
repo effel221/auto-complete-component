@@ -1,8 +1,14 @@
+$medium: 1200px;
+
 .dropDownComponent {
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: center;
   flex-direction: column;
+
+  @media screen and (min-width: $medium) {
+    width: 1024px;
+  }
 }
 
 

@@ -2,12 +2,13 @@ import React, {memo, useEffect, useRef, useState} from 'react';
 import './AutocompleteCountriesNames.scss';
 import {useDebounce} from "../../lib/debounce";
 import DropDown from "../DropDown";
-import {CountriesNamesDataType} from "../../lib/types-interfaces";
+import {CountriesNamesDataTypes} from "../../lib/types-interfaces";
 
 
 const AutocompleteCountriesNames: React.FunctionComponent = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [countriesNameSearchTerm, setCountriesNameSearchTerm] = useState<string>("");
-  const [countriesNamesData, setCountriesNamesData] = useState<CountriesNamesDataType[]>([]);
+  const [countriesNamesData, setCountriesNamesData] = useState<CountriesNamesDataTypes>([]);
   const countriesNameSearchRef = useRef<HTMLInputElement>(null);
   const debouncedCountriesNameTerm = useDebounce(countriesNameSearchTerm, 300);
 
@@ -21,15 +22,17 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
       setCountriesNamesData([])
   }
 
-  const getCountriesNames = async () => {
-      let response;
-      const countriesNamesUrl = `https://restcountries.com/v3.1/name/${debouncedCountriesNameTerm}?fields=name`;
-      response = await fetch(countriesNamesUrl);
-      setCountriesNamesData( await response.json());
-  }
-
   useEffect(()=> {
+      const getCountriesNames = async () => {
+          setIsLoading(true)
+          let response;
+          const countriesNamesUrl = `https://restcountries.com/v3.1/name/${debouncedCountriesNameTerm}?fields=name`;
+          response = await fetch(countriesNamesUrl);
+          setCountriesNamesData( await response.json());
+          setIsLoading(false)
+      }
       debouncedCountriesNameTerm?.length > 0 && getCountriesNames()
+      debouncedCountriesNameTerm?.length === 0 && clearCountriesNames()
   }, [debouncedCountriesNameTerm])
 
   return (
@@ -45,6 +48,7 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
               aria-label="autocomplete Countries name search"
               onChange={changeSearchValue}
               value={countriesNameSearchTerm}
+              autoComplete={"off"}
           />
           <button
               className="autocompleteCountriesNamesClear"
@@ -52,9 +56,11 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
               onClick={clearCountriesNames}
               type="button">x</button>
       </form>
-        <DropDown
-            countriesNamesData={countriesNamesData}
-        />
+      {isLoading && <>Loading ....</>}
+      <DropDown
+          countriesNamesData={countriesNamesData}
+          setCountriesNameSearchTerm={setCountriesNameSearchTerm}
+      />
     </section>
   );
 }
