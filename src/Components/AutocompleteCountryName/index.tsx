@@ -6,8 +6,8 @@ const AutocompleteCountryName: React.FunctionComponent = () => {
   const countryNameSearchRef = useRef<HTMLInputElement>(null)
 
   return (
-    <section className="autocompleteCountry">
-      <div className="autocompleteCountryNameSearchWrapper">
+    <section className="autocompleteCountryName">
+      <form className="autocompleteCountryNameSearchWrapper" role="search">
           <input
               ref={countryNameSearchRef}
               placeholder="Auto complete country name..."
@@ -15,12 +15,13 @@ const AutocompleteCountryName: React.FunctionComponent = () => {
               type="text"
               className="autocompleteCountryNameSearch"
               name="autocompleteCountryNameSearch"
-              aria-label="autocompleteCountryNameSearch"
+              aria-label="autocomplete country name search"
           />
           <button
               className="autocompleteCountryNameClear"
+              aria-label="Clear"
               type="button">x</button>
-      </div>
+      </form>
     </section>
   );
 }

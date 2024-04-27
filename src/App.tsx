@@ -5,7 +5,7 @@ import AutocompleteCountryName from "./Components/AutocompleteCountryName";
 const App: React.FunctionComponent = () => {
   return (
     <>
-      <header className="App-header" role="banner">
+      <header className="App-header">
          <h1>Tatsiana's Auto-complete component</h1>
       </header>
       <main role="main">
