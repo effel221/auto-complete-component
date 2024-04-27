@@ -1,18 +1,18 @@
 $medium: 1200px;
 
-.autocompleteCountryName {
+.autocompleteCountriesName {
   display: flex;
   width: 100%;
   justify-content: center;
 }
 
-.autocompleteCountryNameSearchWrapper {
+.autocompleteCountriesNameSearchWrapper {
   display: flex;
   width: 80%;
   margin: 70px 0 0;
   position: relative;
 
-  .autocompleteCountryNameSearch {
+  .autocompleteCountriesNameSearch {
     display: flex;
     width: 100%;
     padding: 10px 20px;
@@ -31,7 +31,7 @@ $medium: 1200px;
     }
   }
 
-  .autocompleteCountryNameClear {
+  .autocompleteCountriesNamesClear {
     position: absolute;
     padding: 8px 16px;
     right: 0;

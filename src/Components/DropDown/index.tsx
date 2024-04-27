@@ -1,18 +1,19 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import './DropDown.scss';
+import {DropDownProps} from "../../lib/types-interfaces";
 
-type OptionList = {
 
-}
-
-const DropDown: React.FunctionComponent = (optionList) => {
-
+const DropDown: React.FunctionComponent<DropDownProps> = (
+    {countriesNamesData}:DropDownProps) => {
   return (
-    <fieldset>
-      <select className="dropDownComponent">
-
-      </select>
-    </fieldset>
+      <ul className="dropDownComponent">
+        {countriesNamesData && countriesNamesData.map((countryName, ind)=>{
+             const {name} = countryName
+             return <li key={name.common+ind}>
+               {name.common}
+             </li>
+          })}
+      </ul>
   );
 }
 

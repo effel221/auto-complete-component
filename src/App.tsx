@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import AutocompleteCountryName from "./Components/AutocompleteCountryName";
+import AutocompleteCountriesNames from "./Components/AutocompleteCountriesNames";
 
 const App: React.FunctionComponent = () => {
   return (
@@ -9,7 +9,7 @@ const App: React.FunctionComponent = () => {
          <h1>Tatsiana's Auto-complete component</h1>
       </header>
       <main role="main">
-          <AutocompleteCountryName/>
+          <AutocompleteCountriesNames/>
       </main>
     </>
   );

@@ -1,44 +1,8 @@
-.autocompleteCountry {
+.dropDownComponent {
   display: flex;
   width: 100%;
   justify-content: center;
+  flex-direction: column;
 }
 
-.autocompleteCountryNameSearchWrapper {
-  display: flex;
-  width: 80%;
-  margin: 70px 0 0;
-  position: relative;
-
-  .autocompleteCountryNameSearch {
-    display: flex;
-    width: 100%;
-    padding: 10px 20px;
-    border: 2px solid #D97E7E;
-    border-radius: 26px;
-    font-size: 1.1rem;
-    outline: none;
-
-    &:focus, &:focus-visible {
-      border: 2px solid #BF967E;
-    }
-
-    &::placeholder {
-      font-weight: lighter;
-      color: #BFBFBF;
-    }
-  }
-
-  .autocompleteCountryNameClear {
-    position: absolute;
-    padding: 8px 16px;
-    right: 0;
-    top: 0;
-    border: none;
-    background: transparent;
-    font-size: 1.5rem;
-    cursor: pointer;
-    outline: none;
-  }
-}
 
