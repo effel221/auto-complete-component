@@ -9,9 +9,9 @@ const DropDown: React.FunctionComponent<DropDownProps> = (
     const isDataArray = Array.isArray(countriesNamesData)
 
     const onItemClick = useCallback((name:NameInterface)=> {
-        setCountriesNamesInputValue(name.common)
-        setShowDropDown(false)
-    },[setCountriesNamesInputValue])
+        setCountriesNamesInputValue(name.common);
+        setShowDropDown(false);
+    },[setCountriesNamesInputValue, setShowDropDown])
 
     const formattedName = (name: string) => {
         const highlightedContent = name.replace(countriesNamesInputValue,
