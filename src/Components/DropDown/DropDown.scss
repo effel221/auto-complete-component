@@ -1,13 +1,38 @@
 $medium: 1200px;
 
-.dropDownComponent {
-  display: flex;
+.dropDownComponentWrap {
+  margin: 5px 0 0;
   width: 80%;
   justify-content: center;
   flex-direction: column;
+  border: 1px solid #C4A484;
+  border-radius: 0 0 25px 25px;
+  overflow: hidden;
 
   @media screen and (min-width: $medium) {
     width: 1024px;
+  }
+}
+
+.dropDownComponent {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 300px;
+
+  li {
+    padding: 7px 20px;
+    list-style: none;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    font-size: 1rem;
+    font-weight: bold;
+
+    &:hover {
+      background: #D3D3D3;
+    }
   }
 }
 

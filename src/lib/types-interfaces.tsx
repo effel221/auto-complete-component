@@ -29,5 +29,7 @@ export type CountriesNamesDataTypes =
 export interface DropDownProps {
     countriesNamesData: CountriesNamesDataTypes,
     setCountriesNameSearchTerm: Dispatch<SetStateAction<string>>,
-    debouncedNameTerm: string
+    debouncedNameTerm: string,
+    showDropDown: boolean,
+    setShowDropDown: Dispatch<SetStateAction<boolean>>
 }

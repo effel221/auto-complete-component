@@ -4,11 +4,13 @@ import {DropDownProps, NameInterface} from "../../lib/types-interfaces";
 
 
 const DropDown: React.FunctionComponent<DropDownProps> = (
-    {countriesNamesData, setCountriesNameSearchTerm, debouncedNameTerm}:DropDownProps) => {
+    {countriesNamesData, setCountriesNameSearchTerm,
+     debouncedNameTerm, showDropDown, setShowDropDown}:DropDownProps) => {
     const isDataArray = Array.isArray(countriesNamesData)
 
     const onItemClick = useCallback((name:NameInterface)=> {
         setCountriesNameSearchTerm(name.common)
+        setShowDropDown(false)
     },[setCountriesNameSearchTerm])
 
     const formattedName = (name: string) => {
@@ -18,14 +20,18 @@ const DropDown: React.FunctionComponent<DropDownProps> = (
     }
 
   return (
+    <>
+      {showDropDown && <div className="dropDownComponentWrap">
       <ul className="dropDownComponent">
-        {isDataArray && countriesNamesData?.map((countryName, ind)=>{
-            const {name} = countryName
-            return <li key={name.common+ind} onClick={()=>onItemClick(name)}
-                       dangerouslySetInnerHTML={{__html: formattedName(name.common)}}/>
-        })}
-        {!isDataArray && <li>No results were founded...</li>}
+          {isDataArray && countriesNamesData?.map((countryName, ind)=>{
+              const {name} = countryName
+              return <li key={name.common+ind} onClick={()=>onItemClick(name)}
+                         dangerouslySetInnerHTML={{__html: formattedName(name.common)}}/>
+          })}
+          {!isDataArray && <li>No results were founded...</li>}
       </ul>
+      </div>}
+    </>
   );
 }
 

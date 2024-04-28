@@ -7,6 +7,7 @@ import {fetchDataCache, updateCacheData} from "../../lib/FetchDataCacheClass";
 
 
 const AutocompleteCountriesNames: React.FunctionComponent = () => {
+  const [showDropDown, setShowDropDown] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [countriesNameSearchTerm, setCountriesNameSearchTerm] = useState<string>("");
   const [countriesNamesData, setCountriesNamesData] = useState<CountriesNamesDataTypes>([]);
@@ -24,6 +25,7 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
   }
 
   useEffect(()=> {
+      setShowDropDown(true)
       const getCountriesNames = async () => {
           setIsLoading(true)
           let response;
@@ -59,12 +61,14 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
               onClick={clearCountriesNames}
               type="button">x</button>
       </form>
-      {isLoading && <>Loading ....</>}
       <DropDown
           countriesNamesData={countriesNamesData}
           setCountriesNameSearchTerm={setCountriesNameSearchTerm}
           debouncedNameTerm={debouncedNameTerm}
+          showDropDown={showDropDown}
+          setShowDropDown={setShowDropDown}
       />
+      {isLoading && <>Loading ....</>}
     </section>
   );
 }
