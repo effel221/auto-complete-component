@@ -4,18 +4,18 @@ import {DropDownProps, NameInterface} from "../../lib/types-interfaces";
 
 
 const DropDown: React.FunctionComponent<DropDownProps> = (
-    {countriesNamesData, setCountriesNameSearchTerm,
-     debouncedNameTerm, showDropDown, setShowDropDown}:DropDownProps) => {
+    {countriesNamesData, setCountriesNamesInputValue,
+        countriesNamesInputValue, showDropDown, setShowDropDown}:DropDownProps) => {
     const isDataArray = Array.isArray(countriesNamesData)
 
     const onItemClick = useCallback((name:NameInterface)=> {
-        setCountriesNameSearchTerm(name.common)
+        setCountriesNamesInputValue(name.common)
         setShowDropDown(false)
-    },[setCountriesNameSearchTerm])
+    },[setCountriesNamesInputValue])
 
     const formattedName = (name: string) => {
-        const highlightedContent = name.replace(debouncedNameTerm,
-            `<mark>${debouncedNameTerm}</mark>`)
+        const highlightedContent = name.replace(countriesNamesInputValue,
+            `<mark>${countriesNamesInputValue}</mark>`)
         return  highlightedContent
     }
 
