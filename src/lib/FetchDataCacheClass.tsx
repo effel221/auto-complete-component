@@ -5,6 +5,12 @@ export interface FetchDataCacheInterface {
     [key: string]: CountriesNamesDataTypes
 }
 
+interface UpdateCacheInterface {(
+    prop: string,
+    callback: ()=>void,
+    setCountriesNamesData: Dispatch<SetStateAction<CountriesNamesDataTypes>>): void
+}
+
 export const FetchDataCache = class {
     dataCache: FetchDataCacheInterface;
 
@@ -22,11 +28,10 @@ export const FetchDataCache = class {
     }
 }
 
-
 export const fetchDataCache = new FetchDataCache({})
 
-export const updateCacheData = (prop: string, callback: ()=>void,
-    setCountriesNamesData: Dispatch<SetStateAction<CountriesNamesDataTypes>>) => {
+export const updateCacheData: UpdateCacheInterface = (prop, callback,
+    setCountriesNamesData) => {
     const currenData = fetchDataCache.getDataIfAlreadyExist(prop)
     return currenData ? setCountriesNamesData(currenData) : callback()
 }

@@ -63,6 +63,7 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
       <DropDown
           countriesNamesData={countriesNamesData}
           setCountriesNameSearchTerm={setCountriesNameSearchTerm}
+          debouncedNameTerm={debouncedNameTerm}
       />
     </section>
   );
