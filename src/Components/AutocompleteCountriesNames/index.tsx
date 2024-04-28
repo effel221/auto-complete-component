@@ -3,6 +3,7 @@ import './AutocompleteCountriesNames.scss';
 import {useDebounce} from "../../lib/debounce";
 import DropDown from "../DropDown";
 import {CountriesNamesDataTypes} from "../../lib/types-interfaces";
+import {fetchDataCache, updateCacheData} from "../../lib/FetchDataCacheClass";
 
 
 const AutocompleteCountriesNames: React.FunctionComponent = () => {
@@ -10,7 +11,7 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
   const [countriesNameSearchTerm, setCountriesNameSearchTerm] = useState<string>("");
   const [countriesNamesData, setCountriesNamesData] = useState<CountriesNamesDataTypes>([]);
   const countriesNameSearchRef = useRef<HTMLInputElement>(null);
-  const debouncedCountriesNameTerm = useDebounce(countriesNameSearchTerm, 300);
+  const debouncedNameTerm = useDebounce(countriesNameSearchTerm, 300);
 
   const changeSearchValue = () => {
       countriesNameSearchRef.current &&
@@ -26,26 +27,28 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
       const getCountriesNames = async () => {
           setIsLoading(true)
           let response;
-          const countriesNamesUrl = `https://restcountries.com/v3.1/name/${debouncedCountriesNameTerm}?fields=name`;
+          const countriesNamesUrl = `https://restcountries.com/v3.1/name/${debouncedNameTerm}?fields=name`;
           response = await fetch(countriesNamesUrl);
-          setCountriesNamesData( await response.json());
+          const formattedData = await response.json()
+          setCountriesNamesData(formattedData);
+          fetchDataCache.setNewData(debouncedNameTerm, formattedData)
           setIsLoading(false)
       }
-      debouncedCountriesNameTerm?.length > 0 && getCountriesNames()
-      debouncedCountriesNameTerm?.length === 0 && clearCountriesNames()
-  }, [debouncedCountriesNameTerm])
+      debouncedNameTerm?.length > 0 && updateCacheData(debouncedNameTerm, getCountriesNames, setCountriesNamesData)
+      debouncedNameTerm?.length === 0 && clearCountriesNames()
+  }, [debouncedNameTerm])
 
   return (
     <section className="autocompleteCountriesName">
       <form className="autocompleteCountriesNameSearchWrapper" role="search">
           <input
               ref={countriesNameSearchRef}
-              placeholder="Autocomplete Countries name..."
+              placeholder="Autocomplete Countries names..."
               id="autocompleteCountriesNameSearch"
               type="text"
               className="autocompleteCountriesNameSearch"
               name="autocompleteCountriesNameSearch"
-              aria-label="autocomplete Countries name search"
+              aria-label="autocomplete Countries names"
               onChange={changeSearchValue}
               value={countriesNameSearchTerm}
               autoComplete={"off"}
