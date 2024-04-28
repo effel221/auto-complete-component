@@ -8,8 +8,8 @@ import {fetchDataCache, updateCacheData} from "../../lib/FetchDataCacheClass";
 
 const AutocompleteCountriesNames: React.FunctionComponent = () => {
   const [countriesNamesInputValue, setCountriesNamesInputValue] = useState<string>("");
-  const [showDropDown, setShowDropDown] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [countriesNamesSearchTerm, setCountriesNamesSearchTerm] = useState<string>("");
   const [countriesNamesData, setCountriesNamesData] = useState<CountriesNamesDataTypes>([]);
   const countriesNameSearchRef = useRef<HTMLInputElement>(null);
@@ -23,27 +23,27 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
   }
 
   const clearCountriesNames = () => {
-      setCountriesNamesSearchTerm("")
-      setCountriesNamesInputValue("")
-      setCountriesNamesData([])
+      setCountriesNamesSearchTerm("");
+      setCountriesNamesInputValue("");
+      setCountriesNamesData([]);
   }
 
   useEffect(()=> {
       const getCountriesNames = async () => {
-          setIsLoading(true)
+          setIsLoading(true);
           let response;
           const countriesNamesUrl = `https://restcountries.com/v3.1/name/${debouncedNameTerm}?fields=name`;
           response = await fetch(countriesNamesUrl);
           const formattedData = await response.json()
           setCountriesNamesData(formattedData);
-          fetchDataCache.setNewData(debouncedNameTerm, formattedData)
-          setIsLoading(false)
+          fetchDataCache.setNewData(debouncedNameTerm, formattedData);
+          setIsLoading(false);
       }
       if (debouncedNameTerm?.length > 0) {
-        setShowDropDown(true)
-        updateCacheData(debouncedNameTerm, getCountriesNames, setCountriesNamesData)
+        setShowDropDown(true);
+        updateCacheData(debouncedNameTerm, getCountriesNames, setCountriesNamesData);
       } else {
-          clearCountriesNames()
+          clearCountriesNames();
       }
   }, [debouncedNameTerm])
 
@@ -57,14 +57,14 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
               type="text"
               className="autocompleteCountriesNameSearch"
               name="autocompleteCountriesNameSearch"
-              aria-label="autocomplete Countries names"
+              aria-label="autocomplete countries names"
               onChange={changeSearchValue}
               value={countriesNamesInputValue}
               autoComplete={"off"}
           />
           <button
               className="autocompleteCountriesNamesClear"
-              aria-label="Clear"
+              aria-label="clear"
               onClick={clearCountriesNames}
               type="button">x</button>
       </form>
