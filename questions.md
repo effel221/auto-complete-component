@@ -21,7 +21,7 @@ Because, as I wrote in previous question, ShouldComponentUpdate handles updates 
 
 ##5
 
-React componen should be wrapped in one html tag ````<div wrap> </div>```, structure like ```<div1><div2>```, without wrapper, from componet will break page. In older versions it was <div>, then Frament was inveted, to make structure html simpler, novadays it is just <></>.
+React componen should be wrapped in one html tag <pre><div wrap> </div></pre>, structure like <pre>`<div1><div2>`</pre>, without wrapper, from componet will break page. In older versions it was <div>, then Frament was inveted, to make structure html simpler, novadays it is just <></>.
 
 ##6
 
