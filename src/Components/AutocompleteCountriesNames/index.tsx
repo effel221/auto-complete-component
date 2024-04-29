@@ -41,12 +41,17 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
           setIsLoading(false);
       }
       if (debouncedNameTerm?.length > 0) {
-        setShowDropDown(true);
-        updateCacheData(debouncedNameTerm, getCountriesNames, setCountriesNamesData);
+        updateCacheData(debouncedNameTerm, getCountriesNames, setCountriesNamesData)
       } else {
           clearCountriesNames();
       }
   }, [debouncedNameTerm])
+
+  useEffect(()=>{
+      const isDataArray = Array.isArray(countriesNamesData);
+      const isDataExist = isDataArray ? countriesNamesData.length > 0 : countriesNamesData;
+      isDataExist && setShowDropDown(true);
+  },[countriesNamesData, setShowDropDown])
 
   return (
     <section className="autocompleteCountriesName">
