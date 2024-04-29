@@ -21,7 +21,7 @@ const DropDown: React.FunctionComponent<DropDownProps> = (
 
   return (
     <>
-      {showDropDown && <div className="dropDownComponentWrap">
+      {showDropDown && <div data-testid="dropDownComponentWrap" className="dropDownComponentWrap">
       <ul className="dropDownComponent">
           {isDataArray && countriesNamesData?.map((countryName, ind)=>{
               const {name} = countryName

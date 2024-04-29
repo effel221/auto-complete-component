@@ -7,9 +7,10 @@ interface NativeNameInterface {
     }
 }
 
+type NativeNameType = | NativeNameInterface | null
 export interface NameInterface {
     common: string,
-    nativeName: NativeNameInterface,
+    nativeName: NativeNameType,
     official: string
 }
 

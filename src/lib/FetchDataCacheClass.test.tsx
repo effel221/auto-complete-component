@@ -1,4 +1,4 @@
-import {fetchDataCache, FetchDataCache} from "./FetchDataCacheClass";
+import {FetchDataCache} from "./FetchDataCacheClass";
 
 it('fetchDataCache will be updated and not empty', () => {
     const fetchDataCacheTest = new FetchDataCache({});

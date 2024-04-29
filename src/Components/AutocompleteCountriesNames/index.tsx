@@ -26,6 +26,7 @@ const AutocompleteCountriesNames: React.FunctionComponent = () => {
       setCountriesNamesSearchTerm("");
       setCountriesNamesInputValue("");
       setCountriesNamesData([]);
+      setShowDropDown(false);
   }
 
   useEffect(()=> {
